@@ -139,9 +139,9 @@ def update_wandtyp_based_on_wandstruktur(updated):
                     if keyword in wandstruktur:
                         return walltype
 
-        return row['Wandtyp (Optionen-Set)']
+        return row['Wandtyp (Zeichenfolge)']
 
-    updated['Wandtyp (Optionen-Set)'] = updated.apply(update_wandstruktur, axis=1)
+    updated['Wandtyp (Zeichenfolge)'] = updated.apply(update_wandstruktur, axis=1)
     return updated
 
 
