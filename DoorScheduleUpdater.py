@@ -142,6 +142,7 @@ def update_wandtyp_based_on_wandstruktur(updated):
         return row['Wandtyp (Zeichenfolge)']
 
     updated['Wandtyp (Zeichenfolge)'] = updated.apply(update_wandstruktur, axis=1)
+    updated['Wandtyp (Zeichenfolge)'] = updated['Wandtyp (Zeichenfolge)'].astype(str)
     return updated
 
 
