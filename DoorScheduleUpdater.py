@@ -203,6 +203,10 @@ if uploaded_file:
     combined = combined.replace("nan", "")
 
     # Optional: Display the combined dataframe
+    with st.expander("Türmatrix - Vorschau"):
+        st.dataframe(updated)
+
+    # Optional: Display the combined dataframe
     with st.expander("Türmatrix - bereit für Import ins ArchiCAD"):
         st.write(combined)
 
