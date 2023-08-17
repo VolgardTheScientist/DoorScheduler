@@ -73,7 +73,8 @@ def lichtes_durchgangsmass_breite():
     # Convert to float
     updated["Breite Lichtmass"] = updated["Breite Lichtmass"].apply(try_convert_to_float)
     # Multiply by 1000
-    updated["Lichtes Durchgangsmass Breite in mm (Zeichenfolge)"] = updated["Breite Lichtmass"] * 1000
+    updated["Breite Lichtmass"] = pd.to_numeric(updated["Breite Lichtmass"], errors='coerce')
+    updated["Lichtes Durchgangsmass Breite in mm (Zeichenfolge)"] = (updated["Breite Lichtmass"] * 1000).round()
     # Replace NaNs with a placeholder string
     updated["Lichtes Durchgangsmass Breite in mm (Zeichenfolge)"].fillna('---', inplace=True)
     # Convert the entire column to string type
@@ -86,7 +87,8 @@ def lichtes_durchgangsmass_höhe():
     # Convert to float
     updated["Höhe Lichtmass"] = updated["Höhe Lichtmass"].apply(try_convert_to_float)
     # Multiply by 1000
-    updated["Lichtes Durchgangsmass Höhe in mm (Zeichenfolge)"] = updated["Höhe Lichtmass"] * 1000
+    updated["Höhe Lichtmass"] = pd.to_numeric(updated["Höhe Lichtmass"], errors='coerce')
+    updated["Lichtes Durchgangsmass Höhe in mm (Zeichenfolge)"] = (updated["Höhe Lichtmass"] * 1000).round()
     # Replace NaNs with a placeholder string
     updated["Lichtes Durchgangsmass Höhe in mm (Zeichenfolge)"].fillna('---', inplace=True)
     # Convert the entire column to string type
@@ -99,7 +101,8 @@ def rohbaumass_breite():
     # Convert to float
     updated["Breite Rohbau"] = updated["Breite Rohbau"].apply(try_convert_to_float)
     # Multiply by 1000
-    updated["Rohbaumass Breite in mm (Zeichenfolge)"] = updated["Breite Rohbau"] * 1000
+    updated["Breite Rohbau"] = pd.to_numeric(updated["Breite Rohbau"], errors='coerce')
+    updated["Rohbaumass Breite in mm (Zeichenfolge)"] = (updated["Breite Rohbau"] * 1000).round()
     # Replace NaNs with a placeholder string
     updated["Rohbaumass Breite in mm (Zeichenfolge)"].fillna('---', inplace=True)
     # Convert the entire column to string type
@@ -112,7 +115,8 @@ def rohbaumass_höhe():
     # Convert to float
     updated["Höhe Rohbau"] = updated["Höhe Rohbau"].apply(try_convert_to_float)
     # Multiply by 1000
-    updated["Rohbaumass Höhe in mm (Zeichenfolge)"] = updated["Höhe Rohbau"] * 1000
+    updated["Höhe Rohbau"] = pd.to_numeric(updated["Höhe Rohbau"], errors='coerce')
+    updated["Rohbaumass Höhe in mm (Zeichenfolge)"] = (updated["Höhe Rohbau"] * 1000).round()
     # Replace NaNs with a placeholder string
     updated["Rohbaumass Höhe in mm (Zeichenfolge)"].fillna('---', inplace=True)
     # Convert the entire column to string type
@@ -194,6 +198,9 @@ if uploaded_file:
 
     # Set the column indexes of combined to be the same as those of original
     combined.columns = original.columns
+
+    #remove nan string values
+    combined = combined.replace("nan", "")
 
     # Optional: Display the combined dataframe
     with st.expander("Türmatrix - bereit für Import ins ArchiCAD"):
